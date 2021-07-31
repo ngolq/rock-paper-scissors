@@ -1,58 +1,31 @@
-/* 
-Create a function called computerPlay
-Create a variable that returns random values from 1 to 3.
-    use console log to make sure the returning value is random
-if the random value is 1 then returns a string "Rock"
-else if the random value is 2 returns a string "Paper"
-else returns a string "Scissors"
-    Use console log to make sure the returing string is random 
-*/
 function computerPlay() {
     let randomNumb = Math.floor((Math.random()*3) + 1);
     if (randomNumb === 1){
-        return "Rock"
+        return "Rock";
     } else if (randomNumb === 2){
-        return "Paper"
-    } return "Scissors"
+        return "Paper";
+    } return "Scissors";
 }
 
+let tieCount = 0;
+let winCount = 0;
+let loseCount = 0;
 
-// Test the computerPlay function using console.log
-// console.log(computerPlay());
-
-
-
-/*
-Create a function that takes in 2 paramters(playerSelection, copmuterSelection) to decide who wins a round of rock-paper-scissors
-*/
 function playRound(playerSelection, computerSelection) {
-    playerSelection = playerSelection[0].toUpperCase() + playerSelection.substr(1)
-    // if ((playerSelection == "Rock" && computerSelection == "Rock") || (playerSelection == "Paper" && computerSelection == "Paper") || (playerSelection == "Scissors" && computerSelection == "Scissors")){
-    //     return ("It's a tie!")
-    // }
+    playerSelection = playerSelection[0].toUpperCase() + playerSelection.substr(1);
     if (playerSelection == computerSelection){
-        return("It's a tie!")
+        tieCount = tieCount + 1;
+        return("It's a tie!");   
     }
     else if ((playerSelection == "Rock" && computerSelection == "Scissors") || (playerSelection == "Paper" && computerSelection == "Rock") || (playerSelection == "Scissors" && computerSelection == "Paper")) {
-        return (`You won! ${playerSelection} beats ${computerSelection}`)
+        winCount = winCount + 1;
+        return (`You won! ${playerSelection} beats ${computerSelection}`);
     }
     else {
-        return (`You lose! ${computerSelection} beats ${playerSelection}`)
+        loseCount = loseCount + 1;
+        return (`You lose! ${computerSelection} beats ${playerSelection}`);
     }
 }
-
-/* Test the playRound function using the codes below */
-// const playerSelection = "scissors";
-// const computerSelection = computerPlay();
-// console.log(playRound(playerSelection, computerSelection));
-
-
-/* 
-Create a function called game() 
-Loop the playRound function 5 times
-Prompt for user selection b/n rock-paper-scissors and set it as a variable
-Return playRound(playerSelection,computerPlay) to return the result
-*/
 
 function game(){
     for (let i = 1; i <= 5; i++) {
@@ -60,6 +33,15 @@ function game(){
         let computerSelection = computerPlay();
         console.log(playRound(playerSelection,computerSelection));
     }
+    if (winCount > loseCount){
+        return `You won the game. Your score: ${winCount} VS AI score: ${loseCount}`;
+    }
+    else if (loseCount > winCount){
+        return `You lost the game. Your score: ${winCount} VS AI score: ${loseCount}`;
+    }
+    else 
+        return `It's a tie game. Your score: ${winCount} VS AI score: ${loseCount}`;
 }
 
-console.log(game())
+console.log(game());
+
